@@ -19,7 +19,8 @@
       </li>
     </div>
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">TourMate旅行小助手</h3>
+      <h5 class="slogan">来一场说走就走的旅行</h5>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -183,7 +184,12 @@ export default {
   background-size: cover;
 }
 .title {
-  margin: 0px auto 30px auto;
+  margin: 0px auto 10px auto;
+  text-align: center;
+  color: #707070;
+}
+.slogan {
+  margin: 0px auto 4px auto;
   text-align: center;
   color: #707070;
 }
