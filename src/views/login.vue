@@ -1,5 +1,23 @@
 <template>
   <div class="login">
+    <div class="window" style="list-style: none;">
+      <li>
+        <img src="../assets/images/yiheyuan.jpg" alt="" class="sceneImg"/>
+        <div class="text">颐和园</div>
+      </li>
+      <li>
+        <img src="../assets/images/qixingyan.jpg" alt="" class="sceneImg"/>
+        <div class="text">七星岩</div>
+      </li>
+      <li>
+        <img src="../assets/images/hanititian.jpg" alt="" class="sceneImg"/>
+        <div class="text">哈尼梯田</div>
+      </li>
+      <li>
+        <img src="../assets/images/huanghelou.jpg" alt="" class="sceneImg"/>
+        <div class="text">黄鹤楼</div>
+      </li>
+    </div>
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">若依后台管理系统</h3>
       <el-form-item prop="username">
@@ -56,7 +74,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2023 ruoyi.vip All Rights Reserved.</span>
+      <span>Copyright © 2023-2050 travelers All Rights Reserved.</span>
     </div>
   </div>
 </template>
@@ -89,7 +107,7 @@ export default {
       },
       loading: false,
       // 验证码开关
-      captchaEnabled: true,
+      captchaEnabled: false,
       // 注册开关
       register: false,
       redirect: undefined
@@ -171,8 +189,9 @@ export default {
 }
 
 .login-form {
-  border-radius: 6px;
-  background: #ffffff;
+  margin-right: 50px;
+  border-radius: 10px;
+  background: rgb(255,255,255,0.5);
   width: 400px;
   padding: 25px 25px 5px 25px;
   .el-input {
@@ -215,5 +234,46 @@ export default {
 }
 .login-code-img {
   height: 38px;
+}
+.window{
+  border-radius: 10px;
+  width:810px;
+	height:340px;
+	margin:50px auto;
+	border:2px solid #FFF;
+	overflow:hidden;
+	background-color:rgba(255,255,255,0.3);
+	box-shadow:5px 5px 7px rgba(255,255,255,0.5);
+}
+.window li{
+  float:left;
+	position:relative;
+	width:201px;
+	height:370px;
+	box-shadow:0 0 25px #000000;
+	transition:all 0.5s;
+}
+.window li .text{
+	position:absolute;
+	left:0;
+	bottom:0;
+	font-size:16px;
+	color:#FFF;
+	width:100%;
+	height:60px;
+	text-align:center;
+	line-height:30px;
+	background:#000;
+	background-color:rgba(0,0,0,0.7);
+}
+.window:hover li{
+	width:130px;
+}
+.window li:hover{
+	width:415px;
+}
+.sceneImg{
+  // max-width: 100%;
+  max-height: 100%;
 }
 </style>
