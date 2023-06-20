@@ -184,13 +184,17 @@ export default {
   background-size: cover;
 }
 .title {
+  font-family: 'hgw';
   margin: 0px auto 10px auto;
+  font-size: 3ch;
   text-align: center;
   color: #707070;
 }
 .slogan {
+  font-family: 'hgx';
   margin: 0px auto 4px auto;
   text-align: center;
+  font-size: 2ch;
   color: #707070;
 }
 
@@ -234,7 +238,7 @@ export default {
   width: 100%;
   text-align: center;
   color: #fff;
-  font-family: Arial;
+  font-family: 'Arial';
   font-size: 12px;
   letter-spacing: 1px;
 }

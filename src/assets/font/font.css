@@ -1,0 +1,16 @@
+@font-face{
+  font-family: 'lca';
+  src: url('./LCALLIG.TTF')
+}
+@font-face{
+  font-family: 'hgx';
+  src: url('./HGXC_CNKI.TTF')
+}
+@font-face{
+  font-family: 'hgz';
+  src: url('./HGZYT_CNKI.TTF')
+}
+@font-face{
+  font-family: 'hgw';
+  src: url('./HGWT_CNKI.TTF')
+}
