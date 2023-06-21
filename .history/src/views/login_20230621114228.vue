@@ -177,7 +177,11 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .login {
   display: flex;
+<<<<<<< HEAD
   justify-content: space-around;
+=======
+  //justify-content: center;
+>>>>>>> f5792372eca46f4f1e7e511567a9a2a708a2b2a7
   align-items: center;
   height: 100%;
   background-image: url("../assets/images/login-background.jpg");
