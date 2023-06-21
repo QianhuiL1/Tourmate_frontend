@@ -1,4 +1,16 @@
 // cover some element-ui styles
+.el-button--primary {
+  background-color: #8ac6d1;
+  border-color: #8ac6d1;
+  &:active{
+    background: #22a5bc !important;
+    border-color: #22a5bc;
+  }
+  &:hover{
+    background: #22a5bc !important;
+    border-color: #22a5bc;
+  }
+}
 
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {

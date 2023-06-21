@@ -61,6 +61,19 @@ export const constantRoutes = [
     component: () => import('@/views/error/401'),
     hidden: true
   },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: 'index',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/menu/index'),
+  //       name: 'Index',
+  //       meta: { title: '首页', icon: 'dashboard', affix: true }
+  //     }
+  //   ]
+  // },
   {
     path: '',
     component: Layout,
@@ -68,9 +81,61 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/index'),
-        name: 'Index',
+        component: () => import('@/views/menu/index'),
+        name: 'menu',
         meta: { title: '首页', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'dataPanel',
+    children: [
+      {
+        path: 'dataPanel',
+        component: () => import('@/views/dataPanel/index'),
+        name: 'dataPanel',
+        meta: { title: '大数据面板', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'customize',
+    children: [
+      {
+        path: 'customize',
+        component: () => import('@/views/customize/index'),
+        name: 'customize',
+        meta: { title: '个性化定制', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'community',
+    children: [
+      {
+        path: 'community',
+        component: () => import('@/views/community/index'),
+        name: 'community',
+        meta: { title: '交流社区', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '',
+    component: Layout,
+    redirect: 'scenery',
+    children: [
+      {
+        path: 'scenery',
+        component: () => import('@/views/scenery/index'),
+        name: 'scenery',
+        meta: { title: '景点一览', icon: 'dashboard', affix: true }
       }
     ]
   },

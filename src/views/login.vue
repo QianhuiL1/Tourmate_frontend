@@ -110,7 +110,7 @@ export default {
       // 验证码开关
       captchaEnabled: false,
       // 注册开关
-      register: false,
+      register: true,
       redirect: undefined
     };
   },
@@ -174,10 +174,10 @@ export default {
 };
 </script>
 
-<style rel="stylesheet/scss" lang="scss">
+<style rel="stylesheet/scss" lang="scss" scoped>
 .login {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   background-image: url("../assets/images/login-background.jpg");
@@ -199,7 +199,7 @@ export default {
 }
 
 .login-form {
-  margin-right: 50px;
+  margin-right: 40px;
   border-radius: 10px;
   background: rgb(255,255,255,0.5);
   width: 400px;
@@ -283,7 +283,6 @@ export default {
 	width:415px;
 }
 .sceneImg{
-  // max-width: 100%;
   max-height: 100%;
 }
 </style>
