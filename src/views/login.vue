@@ -177,7 +177,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss">
 .login {
   display: flex;
-  justify-content: center;
+  //justify-content: center;
   align-items: center;
   height: 100%;
   background-image: url("../assets/images/login-background.jpg");
@@ -245,11 +245,13 @@ export default {
 .login-code-img {
   height: 38px;
 }
+// 图片展示区
 .window{
   border-radius: 10px;
   width:810px;
 	height:340px;
-	margin:50px auto;
+  margin-left: 100px;
+	margin-right:120px;
 	border:2px solid #FFF;
 	overflow:hidden;
 	background-color:rgba(255,255,255,0.3);
