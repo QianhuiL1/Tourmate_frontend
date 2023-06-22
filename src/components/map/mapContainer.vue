@@ -6,7 +6,7 @@
 /*eslint quotes: ["error", "double"]*/
 import AMapLoader from "@amap/amap-jsapi-loader";
 import { shallowRef } from "@vue/reactivity";
-// const map = shallowRef(null)
+
 export default {
   setup() {
     const map = shallowRef(null);
@@ -21,8 +21,8 @@ export default {
   methods: {
     initMap() {
       AMapLoader.load({
-        key: "7ed86598e5059579f520c64c103c5887", // 申请好的Web端开发者Key，首次调用 load 时必填
-        version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+        key: "7ed86598e5059579f520c64c103c5887",
+        version: "2.0",
         plugins: [""], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       })
         .then((AMap) => {
@@ -45,7 +45,7 @@ export default {
 #container {
   padding: 0px;
   margin: 0px;
-  width: 300px;
-  height: 200px;
+  width: 500px;
+  height: 450px;
 }
 </style>
