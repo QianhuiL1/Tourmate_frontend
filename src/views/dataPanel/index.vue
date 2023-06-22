@@ -1,12 +1,24 @@
 <template>
   <div class="parent">/
     <div class="div1">
-      
+      <div>热力图</div>
       <map-container/>
     </div>
-    <div class="div2">热门景点排行</div>
-    <div class="div3">各省旅游人数饼图</div>
-    <div class="div4">旅游金额折线图</div>
+    <div class="div2">
+      <div>热门景点排行</div>
+      <funnel-chart/>
+    </div>
+
+    <div class="div3">
+      <div>各省旅游人数</div>
+      <pine-chart/>
+    </div>
+
+    <div class="div4">
+      <div>旅游金额折线图</div>
+      <line-chart/>
+    </div>
+
     <div class="div5">旅游新闻</div>
     
   </div>
@@ -14,13 +26,14 @@
 
 <script>
 import MapContainer from "../../components/map/mapContainer.vue";
+import lineChart from "../../components/charts/lineChart.vue";
+import funnelChart from "../../components/charts/funnelChart.vue";
+import pineChart from "../../components/charts/pineChart.vue";
 
 export default({
-  components: { MapContainer },
-    MapContainer
+  components: { MapContainer,lineChart,funnelChart,pineChart },
 });
-</script
-MapContainer>
+</script>
 
 <style scoped>
 .parent {
@@ -38,7 +51,6 @@ MapContainer>
 }
 .div2 {
   grid-area: 1 / 4 / 3 / 7;
-  color: red;
 }
 .div3 {
   grid-area: 3 / 4 / 5 / 7;
