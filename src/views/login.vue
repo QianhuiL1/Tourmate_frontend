@@ -91,8 +91,8 @@ export default {
     return {
       codeUrl: "",
       loginForm: {
-        username: "admin",
-        password: "admin123",
+        username: "123",
+        password: "123456",
         rememberMe: false,
         code: "",
         uuid: ""
@@ -129,7 +129,9 @@ export default {
   methods: {
     getCode() {
       getCodeImg().then(res => {
+        //console.log(res)
         this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
+        //console.log('是否有验证码',this.captchaEnabled)
         if (this.captchaEnabled) {
           this.codeUrl = "data:image/gif;base64," + res.img;
           this.loginForm.uuid = res.uuid;

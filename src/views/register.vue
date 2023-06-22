@@ -126,7 +126,7 @@ export default {
           this.loading = true;
           register(this.registerForm).then(res => {
             const username = this.registerForm.username;
-            this.$alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", '系统提示', {
+            this.$alert("您的账号 " + username + " 注册成功！", '系统提示', {
               dangerouslyUseHTMLString: true,
               type: 'success'
             }).then(() => {
