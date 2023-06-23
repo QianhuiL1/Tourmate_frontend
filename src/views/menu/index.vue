@@ -2,7 +2,7 @@
   <div class="backBody">
     <div class="left" style="margin-right: 20px">
       <div class="up">
-        <el-card style="margin-top: 100px;margin-left:30px;margin-right:640px;background-color: #bbded7">
+        <el-card style="margin-top: 100px;margin-left:30px;margin-right:640px;border:none;background-color: #bbded7">
           <div class="select">
             <div class="select1">
               <template>
@@ -12,7 +12,7 @@
                     :options="options"
                     filterable
                     clearable
-                    style="height: 20px;"
+                    stylse="height: 20px;"
                     size="small"
                     @change="handleQuery"
                     placeholder="请选择地点"
@@ -45,25 +45,105 @@
       </el-card>
       </div>
       <div class="middle">
-        <div class="div1"></div>
-
-        <div class="div2"></div>
-
-        <div class="div3"></div>
-
-        <div class="div4"></div>
-
-        <div class="div5"></div>
-
-        <div class="div6"></div>
-        
+        <div class="rowInMiddle">
+          <el-card class="sceneCard">
+            <div class="sceneImg">
+              <img :src="sceneList[0]" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ sceneName[0] }}</h4>
+            </div>
+          </el-card>
+          <el-card class="sceneCard">
+            <div class="sceneImg">
+              <img :src="sceneList[1]" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ sceneName[1] }}</h4>
+            </div>
+          </el-card>
+          <el-card class="sceneCard">
+            <div class="sceneImg">
+              <img :src="sceneList[2]" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ sceneName[2] }}</h4>
+            </div>
+          </el-card>
+        </div>
+        <div class="rowInMiddle">
+          <el-card class="sceneCard">
+            <div class="sceneImg">
+              <img :src="sceneList[3]" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ sceneName[3] }}</h4>
+            </div>
+          </el-card>
+          <el-card class="sceneCard">
+            <div class="sceneImg">
+              <img :src="sceneList[4]" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ sceneName[4] }}</h4>
+            </div>
+          </el-card>
+          <el-card class="sceneCard">
+            <div class="sceneImg">
+              <img :src="sceneList[5]" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ sceneName[5] }}</h4>
+            </div>
+          </el-card>
+        </div>
+        <div class="more"><el-link type="primary" href="https://www.ctrip.com/" target="_blank">更多</el-link></div>
       </div>
       <div class="below">
-
+        <div class="hotTitle">
+          <h1>当季热推</h1>
+        </div>
+        <div class="hotRow">
+          <el-card class="hotItem">
+            <div class="hotImg">
+              <img :src="hotList[0]" alt="" class="itemImg">
+            </div>
+            <div class="itemTitle">
+              <h4>{{ hotName[0] }}</h4>
+            </div>
+          </el-card>
+          <el-card class="hotItem">
+            <div class="hotImg">
+              <img :src="hotList[1]" alt="" class="itemImg">
+            </div>
+            <div class="itemTitle">
+              <h4>{{ hotName[1] }}</h4>
+            </div>
+          </el-card>
+        </div>
+        <div class="hotRow">
+          <el-card class="hotItem">
+            <div class="hotImg">
+              <img :src="hotList[2]" alt="" class="itemImg">
+            </div>
+            <div class="itemTitle">
+              <h4>{{ hotName[2] }}</h4>
+            </div>
+          </el-card>
+          <el-card class="hotItem">
+            <div class="hotImg">
+              <img :src="hotList[3]" alt="" class="itemImg">
+            </div>
+            <div class="itemTitle">
+              <h4>{{ hotName[3] }}</h4>
+            </div>
+          </el-card>
+        </div>
       </div>
     </div>
-    <div class="right">
+    <div :class="fixed == true ? 'fixedRight' : 'right'">
       <el-card class="rightCard">
+        
 
       </el-card>
     </div>
@@ -78,6 +158,7 @@ export default {
   name: "Menu",
   data() {
     return {
+      fixed: false,
       modelList:[],
       checkAll: false,
       models: modelOptions,
@@ -90,6 +171,16 @@ export default {
       options: regionData,
       // 存放用户选择后省市区的信息
       selectedOptions: [],
+      sceneList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'
+  ],
+      sceneName:['景点名','景点名','景点名','景点名','景点名','景点名'],
+      hotList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'],
+      hotName:['热推名','热推名','热推名','热推名']
     };
   },
   watch: {
@@ -103,7 +194,16 @@ export default {
   created() {
     
   },
+  mounted(){
+    window.addEventListener('scroll',this.fixedCard)
+  },
   methods: {
+    fixedCard(){
+      var scrollTop =
+      document.documentElement.scrollTop ||
+      document.body.scrollTop
+      scrollTop >= 80 ? (this.fixed = true) : (this.fixed = false)
+    },
     handleQuery(){
 
     },
@@ -140,15 +240,22 @@ export default {
   background-size: 100% 
 }
 .right{
-  position: fixed;
-  top: 100px;
+  position: absolute;
+  top: 90px;
   right: 30px;
-  .rightCard{
+  
+}
+.fixedRight{
+  position: fixed;
+  top: 20px;
+  right: 30px;
+}
+.rightCard{
+  margin-top:20px;
     border-radius: 10px;
     height: 600px;
     width: 600px;
   }
-}
 .up{
   display: flex;
   flex-direction: column;
@@ -218,44 +325,76 @@ export default {
 .middle{
   margin-left: 30px;
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-}
-.div1 { 
-  width: 200px;
-  height: 200px;
-  background-color: #fae3d9;
-  grid-area: 1 / 1 / 2 / 2; 
-}
-.div2 { 
-  width: 200px;
-  height: 200px;
-  background-color: #fae3d9;
-  grid-area: 1 / 2 / 2 / 3; }
-.div3 { 
-  width: 200px;
-  height: 200px;
-  background-color: #fae3d9;
-  grid-area: 1 / 3 / 2 / 4; }
-.div4 { 
-  width: 200px;
-  height: 200px;
-  background-color: #fae3d9;
-  grid-area: 2 / 1 / 3 / 2; }
-.div5 { 
-  width: 200px;
-  height: 200px;
-  background-color: #fae3d9;
-  grid-area: 2 / 2 / 3 / 3; }
-.div6 { 
-  width: 200px;
-  height: 200px;
-  background-color: #fae3d9;
-  grid-area: 2 / 3 / 3 / 4; 
+  margin-right: 640px;
+  .rowInMiddle{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
+  .sceneCard{
+    //background-color: blue;
+    height: 200px;
+    width: 220px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    .sceneImg{
+      height: 150px;
+      width: 200px;
+      display: table-cell;
+      text-align: center;
+      .fullImg{
+        width: 100%;
+        height: 150px;
+      }
+    }
+    .sceneTitle{
+      text-align:center;
+      margin-top: -15px;
+    }
+    }
+    .more{
+      float: right;
+      margin-top: 10px;
+    }
+}
+.below{
+  display:flex;
+  flex-direction: column;
+  margin-left: 30px;
+  margin-right: 660px;
+  .hotTitle{
+    font-family: 'hgz';
+    font-size: 20px;
+  }
+  .hotRow{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .hotItem{
+      margin-top: 10px;
+      margin-bottom: 20px;
+      display:flex;
+      flex-direction: column;
+      height: 200px;
+      width: 320px;
+      .hotImg{
+        height: 150px;
+        width: 300px;
+        display: table-cell;
+        text-align: center;
+        .itemImg{
+          width: 100%;
+          height: 150px;
+        }
+      }
+      .itemTitle{
+        margin-top: -15px;
+        text-align:center;
+      }
+    }
+  }
+}
 </style>
 
 
