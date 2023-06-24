@@ -118,7 +118,6 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .main {
   height: 300px;
-  width: 400px;
-  margin: 0px;
+  width: 600px;
 }
 </style>

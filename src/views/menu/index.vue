@@ -97,9 +97,37 @@
             </div>
           </el-card>
         </div>
-        <div class="more"><el-link type="primary" href="https://www.ctrip.com/" target="_blank">更多</el-link></div>
+        <el-button type="text" v-if="!showMore" class="more" @click="getMore">更多</el-button>
+        <div class="rowInMiddle" v-show="showMore">
+        <template v-for='(item,index) in dividedItems'>
+          <el-card class="sceneCard" :key='index' v-if="index%3===2" element-loading-text="拼命加载中">
+            <div class="sceneImg">
+              <img :src="item.img" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ item.name }}</h4>
+            </div>
+          </el-card>
+          <el-card class="sceneCard" :key='index' v-if="index%3===0" element-loading-text="拼命加载中">
+            <div class="sceneImg">
+              <img :src="item.img" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ item.name }}</h4>
+            </div>
+          </el-card>
+          <el-card class="sceneCard" :key='index' v-if="index%3===1" element-loading-text="拼命加载中">
+            <div class="sceneImg">
+              <img :src="item.img" alt="" class="fullImg">
+            </div>
+            <div class="sceneTitle">
+              <h4>{{ item.name }}</h4>
+            </div>
+          </el-card>
+        </template>
+        </div>
       </div>
-      <div class="below">
+      <div class="below" v-show="!showMore">
         <div class="hotTitle">
           <h1>当季热推</h1>
         </div>
@@ -163,6 +191,7 @@ export default {
   data() {
     return {
       fixed: false,
+      showMore: false,
       modelList:[],
       checkAll: false,
       models: modelOptions,
@@ -175,6 +204,8 @@ export default {
       options: regionData,
       // 存放用户选择后省市区的信息
       selectedOptions: [],
+      searchItems:[],
+      dividedItems: [],
       sceneList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
       'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
       'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
@@ -196,7 +227,7 @@ export default {
     }
   },
   created() {
-    
+    this.divideItems();
   },
   mounted(){
     window.addEventListener('scroll',this.fixedCard)
@@ -207,6 +238,30 @@ export default {
       document.documentElement.scrollTop ||
       document.body.scrollTop
       scrollTop >= 90 ? (this.fixed = true) : (this.fixed = false)
+    },
+    divideItems(){
+      // 获取总的搜索结果并减去最前面6个
+       this.dividedItems=[
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点2'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点3'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点4'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点5'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点6'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点7'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点8'}
+       ]
+    }, 
+    getMore(){
+      this.showMore = true;
     },
     handleQuery(){
 
@@ -340,13 +395,15 @@ export default {
   margin-top: 20px;
   margin-right: 640px;
   .rowInMiddle{
-    margin-top:15px;
+    // margin-top:15px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .sceneCard{
     //background-color: blue;
+    margin-top: 10px;
     ::v-deep .el-card__body {
     padding: 0;
     }

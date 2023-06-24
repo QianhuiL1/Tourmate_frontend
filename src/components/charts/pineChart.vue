@@ -49,6 +49,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .main {
   height: 300px;
-  width: 400px;
+  width: 600px;
+  left: 20%;
 }
 </style>
