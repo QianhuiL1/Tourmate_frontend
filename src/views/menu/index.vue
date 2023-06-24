@@ -2,7 +2,7 @@
   <div class="backBody">
     <div class="left" style="margin-right: 20px">
       <div class="up">
-        <el-card style="margin-top: 100px;margin-left:30px;margin-right:640px;border:none;background-color: #bbded7">
+        <el-card class="inputCard">
           <div class="select">
             <div class="select1">
               <template>
@@ -112,6 +112,8 @@
               <h4>{{ hotName[0] }}</h4>
             </div>
           </el-card>
+        </div>
+        <div class="hotRow">
           <el-card class="hotItem">
             <div class="hotImg">
               <img :src="hotList[1]" alt="" class="itemImg">
@@ -124,18 +126,20 @@
         <div class="hotRow">
           <el-card class="hotItem">
             <div class="hotImg">
-              <img :src="hotList[2]" alt="" class="itemImg">
+              <img :src="hotList[1]" alt="" class="itemImg">
             </div>
             <div class="itemTitle">
-              <h4>{{ hotName[2] }}</h4>
+              <h4>{{ hotName[1] }}</h4>
             </div>
           </el-card>
+        </div>
+        <div class="hotRow">
           <el-card class="hotItem">
             <div class="hotImg">
-              <img :src="hotList[3]" alt="" class="itemImg">
+              <img :src="hotList[1]" alt="" class="itemImg">
             </div>
             <div class="itemTitle">
-              <h4>{{ hotName[3] }}</h4>
+              <h4>{{ hotName[1] }}</h4>
             </div>
           </el-card>
         </div>
@@ -179,8 +183,8 @@ export default {
       'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'
   ],
       sceneName:['景点名','景点名','景点名','景点名','景点名','景点名'],
-      hotList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'],
-      hotName:['热推名','热推名','热推名','热推名']
+      hotList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'],
+      hotName:['热推名','热推名']
     };
   },
   watch: {
@@ -202,7 +206,7 @@ export default {
       var scrollTop =
       document.documentElement.scrollTop ||
       document.body.scrollTop
-      scrollTop >= 80 ? (this.fixed = true) : (this.fixed = false)
+      scrollTop >= 90 ? (this.fixed = true) : (this.fixed = false)
     },
     handleQuery(){
 
@@ -235,15 +239,22 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   position: relative;
-  background-image: url(../../assets/images/homepage.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 
+}
+.inputCard{
+   margin-top: 50px;
+   margin-left:30px;
+   margin-right:640px;
+   border-radius: 10px;
+   border:none;
+   //background-color: #bbded7";
+   background-image: url(../../assets/images/homepage3.jpg);
+   background-repeat: no-repeat;
+   background-size: 100% 100%
 }
 .right{
   position: absolute;
-  top: 90px;
+  top: 30px;
   right: 30px;
-  
 }
 .fixedRight{
   position: fixed;
@@ -251,10 +262,12 @@ export default {
   right: 30px;
 }
 .rightCard{
-  margin-top:20px;
+  margin-top:10px;
     border-radius: 10px;
-    height: 600px;
+    height: 650px;
     width: 600px;
+    background-image: url(https://img.zcool.cn/community/01c9a95aee6479a801219b7f8d9208.jpg@1280w_1l_2o_100sh.jpg);
+    background-size: 600px 650px
   }
 .up{
   display: flex;
@@ -327,25 +340,30 @@ export default {
   margin-top: 20px;
   margin-right: 640px;
   .rowInMiddle{
+    margin-top:15px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
   }
   .sceneCard{
     //background-color: blue;
+    ::v-deep .el-card__body {
+    padding: 0;
+    }
     height: 200px;
     width: 220px;
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
     .sceneImg{
       height: 150px;
-      width: 200px;
-      display: table-cell;
-      text-align: center;
+      width: 220px;
+      border-radius: 10px;
+      // display: table-cell;
+      // text-align: center;
       .fullImg{
         width: 100%;
-        height: 150px;
+        height: 100%;
       }
     }
     .sceneTitle{
@@ -368,29 +386,39 @@ export default {
     font-size: 20px;
   }
   .hotRow{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-around;
+    margin-top:10px;
+    // display:flex;
+    // flex-direction: row;
+    // justify-content: space-around;
     .hotItem{
-      margin-top: 10px;
+      ::v-deep .el-card__body {
+        padding: 0;
+        }
       margin-bottom: 20px;
+      border-radius: 10px;
       display:flex;
-      flex-direction: column;
-      height: 200px;
-      width: 320px;
+      flex-direction: row;
+      // justify-content: space-around;
+      height: 120px;
       .hotImg{
-        height: 150px;
-        width: 300px;
-        display: table-cell;
-        text-align: center;
+        height: 120px;
+        width: 200px;
+        float: left;
+        // display: table-cell;
+        // text-align: left;
         .itemImg{
           width: 100%;
-          height: 150px;
+          height: 120px;
         }
       }
       .itemTitle{
-        margin-top: -15px;
-        text-align:center;
+        margin-left: 10px;
+        float: right;
+        font-family: 'lca';
+        font-size: 25px;
+        vertical-align: center;
+        //margin-top: -15px;
+        //text-align:right;
       }
     }
   }
