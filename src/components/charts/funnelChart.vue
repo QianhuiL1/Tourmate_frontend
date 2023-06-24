@@ -19,13 +19,20 @@ export default {
           trigger: "item",
           formatter: "{b} : {c}%",
         },
+        grid:{
+            x:25,
+            y:45,
+            x2:5,
+            y2:20,
+            borderWidth:1
+        },
         series: [
           {
             name: "Funnel",
             type: "funnel",
             left: "10%",
-            top: 60,
-            bottom: 60,
+            //top: 60,
+            //bottom: 60,
             width: "80%",
             min: 0,
             minSize: "0%",
@@ -112,5 +119,6 @@ export default {
 .main {
   height: 300px;
   width: 400px;
+  margin: 0px;
 }
 </style>

@@ -8,23 +8,21 @@
     </el-card>
     <el-card class="div2">
       <div class="title">热门景点排行</div>
-      <funnel-chart/>
+      <div class="content"><funnel-chart/></div>
     </el-card>
-
     <el-card class="div3">
       <div class="title">各省旅游人数</div>
-      <pine-chart/>
+      <div class="content"><pine-chart/></div>
     </el-card>
-
     <el-card class="div4">
       <div class="title">旅游金额折线图</div>
-      <line-chart/>
+      <div class="content"><line-chart/></div>
     </el-card>
 
     <el-card class="div5">
       <div class="title">旅游新闻</div>
+      <div class="content"><line-chart/></div>
       </el-card>
-    
   </div>
 </template>
 
@@ -44,10 +42,12 @@ export default({
 .parent {
   margin-top:10px;
   display: grid;
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(7, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  margin-left:30px
+  margin-left:30px;
+  margin-right: 30px;
 }
 .title{
   margin-top: 10px;
@@ -65,7 +65,7 @@ export default({
   width: 700px;
   display:flex;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 20px;
 
 }
 ::v-deep .el-card__body {
@@ -73,14 +73,22 @@ export default({
         }
 .div2 {
   grid-area: 1 / 4 / 3 / 7;
+  height: 300px;
+  border-radius: 20px;
 }
 .div3 {
   grid-area: 3 / 4 / 5 / 7;
+  height: 300px;
+  border-radius: 20px;
 }
 .div4 {
   grid-area: 5 / 1 / 8 / 5;
+  border-radius: 20px;
+  height: 300px;
 }
 .div5 {
   grid-area: 5 / 5 / 8 / 7;
+  border-radius: 20px;
+  height: 300px;
 }
 </style>
