@@ -46,86 +46,67 @@
       </div>
       <div class="middle">
         <div class="rowInMiddle">
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[0]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[0] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[1]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[1] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[2]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[2] }}</h4>
-            </div>
-          </el-card>
-        </div>
-        <div class="rowInMiddle">
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[3]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[3] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[4]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[4] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[5]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[5] }}</h4>
-            </div>
-          </el-card>
+          <template v-for='(item,index) in initItems'>
+            <el-card class="sceneCard" :key='index' v-if="index%3===0" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===1" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===2" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+          </template>
         </div>
         <el-button type="text" v-if="!showMore" class="more" @click="getMore">更多</el-button>
-        <div class="rowInMiddle" v-show="showMore">
-        <template v-for='(item,index) in dividedItems'>
-          <el-card class="sceneCard" :key='index' v-if="index%3===2" element-loading-text="拼命加载中">
-            <div class="sceneImg">
-              <img :src="item.img" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ item.name }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard" :key='index' v-if="index%3===0" element-loading-text="拼命加载中">
-            <div class="sceneImg">
-              <img :src="item.img" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ item.name }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard" :key='index' v-if="index%3===1" element-loading-text="拼命加载中">
-            <div class="sceneImg">
-              <img :src="item.img" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ item.name }}</h4>
-            </div>
-          </el-card>
-        </template>
+        <div v-infinite-scroll="load" class="rowInMiddle" v-show="showMore">
+          <template v-for='(item,index) in dividedItems'>
+            <el-card class="sceneCard" :key='index' v-if="index%3===0" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===1" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===2" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+          </template>
         </div>
+        <!-- 下拉加载时的loading动画 -->
+        <div v-if="loading" style="margin-top:10px" class="loading">
+          <span></span>
+        </div>
+        <div v-if="noMore" style="margin: 10 auto; text-align:center; font-size:18px;font-weight: 550; color:#000000">-----------我是有底线的------------</div>
       </div>
       <div class="below" v-show="!showMore">
         <div class="hotTitle">
@@ -176,7 +157,6 @@
     <div :class="fixed == true ? 'fixedRight' : 'right'">
       <el-card class="rightCard">
         
-
       </el-card>
     </div>
   </div>
@@ -184,10 +164,14 @@
 
 <script>
 import { regionData} from 'element-china-area-data'
+import { vInfiniteScroll } from 'element-ui'
 const modelOptions = ["一日游","跟团游","自由行","主题游","游学"]
 const typeOptions = ["现代风情","历史风情","博物馆","动物园","游乐中心","历史伟人","休闲公园","植物园","国内名校","购物中心","电影剧院","红色文化","体育中心","宗教圣地","美食天地"]
 export default {
   name: "Menu",
+  directives:{
+    "infinite-scroll": vInfiniteScroll,
+  },
   data() {
     return {
       fixed: false,
@@ -204,18 +188,14 @@ export default {
       options: regionData,
       // 存放用户选择后省市区的信息
       selectedOptions: [],
-      searchItems:[],
-      dividedItems: [],
-      sceneList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'
-  ],
-      sceneName:['景点名','景点名','景点名','景点名','景点名','景点名'],
+      searchItems:[], // 搜索出的所有数据
+      initItems: [], // 展示出的部分数据
+      dividedItems: [], // 渲染数据数组
+      loading: false, // 加载动画
+      pages: 10, // 数据总页数
+      pageIndex: 1 ,// 分页查询参数
       hotList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'],
-      hotName:['热推名','热推名']
+      hotName:['热推名','热推名'],
     };
   },
   watch: {
@@ -229,8 +209,25 @@ export default {
   created() {
     this.divideItems();
   },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect;
+      },
+      immediate: true
+    }
+  },
+  computed:{
+    noMore(){
+      // 页数大于总页数停止加载
+      return this.pageIndex >= this.pages;
+    },
+    disabled(){
+      return this.loading || this.noMore;
+    }
+  },
   mounted(){
-    window.addEventListener('scroll',this.fixedCard)
+    window.addEventListener('scroll',this.fixedCard);
   },
   methods: {
     fixedCard(){
@@ -240,8 +237,10 @@ export default {
       scrollTop >= 90 ? (this.fixed = true) : (this.fixed = false)
     },
     divideItems(){
-      // 获取总的搜索结果并减去最前面6个
-       this.dividedItems=[
+      // 获取搜索结果
+      // 将前六项取出放入sceneList
+      // 剩余加入dividedItems
+       this.initItems=[
        {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
        name:'景点'},
        {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
@@ -254,17 +253,31 @@ export default {
        name:'景点5'},
        {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
        name:'景点6'},
-       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-       name:'景点7'},
-       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-       name:'景点8'}
        ]
+       this.dividedItems = this.initItems
     }, 
     getMore(){
       this.showMore = true;
     },
+    // 下拉加载事件
+    load(){
+      // 划到底部时进行加载
+      this.loading = true;
+      setTimeout(() => {
+        let param = {
+          pageIndex:this.pageIndex+1,   //分页参数
+          pageSize:6, //每页查询的条数
+        }
+        // 请求获取数据
+      }, 1500);
+    },
+    // 跳转到详情页
+    toInfo(item){
+      console.log(item)
+      this.$router.push({path:"/scenery",query:{param: item.name}})
+    },
     handleQuery(){
-
+      // 给pages总页数赋值
     },
     handleCheckAllChange(val) {
         this.modelList = val ? modelOptions : [];
@@ -408,7 +421,7 @@ export default {
     padding: 0;
     }
     height: 200px;
-    width: 220px;
+    width: 213px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -418,14 +431,20 @@ export default {
       border-radius: 10px;
       // display: table-cell;
       // text-align: center;
+      :hover {
+        cursor: pointer; //鼠标变手
+        }
       .fullImg{
+        
         width: 100%;
         height: 100%;
       }
     }
     .sceneTitle{
       text-align:center;
-      margin-top: -15px;
+      :hover{
+        color: blue
+      }
     }
     }
     .more{
@@ -437,7 +456,7 @@ export default {
   display:flex;
   flex-direction: column;
   margin-left: 30px;
-  margin-right: 660px;
+  margin-right: 640px;
   .hotTitle{
     font-family: 'hgz';
     font-size: 20px;
