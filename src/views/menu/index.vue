@@ -165,6 +165,8 @@
 <script>
 import { regionData} from 'element-china-area-data'
 import { vInfiniteScroll } from 'element-ui'
+import {mapGetters, mapState,mapMutations} from 'vuex';
+import store from '@/store'
 const modelOptions = ["一日游","跟团游","自由行","主题游","游学"]
 const typeOptions = ["现代风情","历史风情","博物馆","动物园","游乐中心","历史伟人","休闲公园","植物园","国内名校","购物中心","电影剧院","红色文化","体育中心","宗教圣地","美食天地"]
 export default {
@@ -208,14 +210,6 @@ export default {
   },
   created() {
     this.divideItems();
-  },
-  watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect;
-      },
-      immediate: true
-    }
   },
   computed:{
     noMore(){
@@ -274,6 +268,7 @@ export default {
     // 跳转到详情页
     toInfo(item){
       console.log(item)
+      this.$store.commit('setBasicInfo',item)
       this.$router.push({path:"/scenery",query:{param: item.name}})
     },
     handleQuery(){

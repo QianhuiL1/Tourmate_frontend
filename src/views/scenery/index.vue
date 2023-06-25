@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
 export default{
   name:'Scenery',
   data(){
@@ -17,6 +16,7 @@ export default{
   methods:{
     initData(){
       console.log(this.$route.query.param)
+      console.log(this.$store.state.sceneInfo)
     }
   }
 
