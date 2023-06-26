@@ -2,27 +2,25 @@
   <div class="parent">
     <el-card class="div1">
       <div class="title">热力图</div>
-      <div class="content">
-      <heat-map/>
-    </div>
+      <div class="content"><heat-map /></div>
     </el-card>
     <el-card class="div2">
       <div class="title">热门景点排行</div>
-      <div class="content"><funnel-chart/></div>
+      <div class="content"><funnel-chart /></div>
     </el-card>
     <el-card class="div3">
       <div class="title">各省旅游人数</div>
-      <div class="content"><pine-chart/></div>
+      <div class="content"><pine-chart /></div>
     </el-card>
     <el-card class="div4">
       <div class="title">旅游金额折线图</div>
-      <div class="content"><line-chart/></div>
+      <div class="content"><line-chart /></div>
     </el-card>
 
     <el-card class="div5">
       <div class="title">旅游新闻</div>
-      <div class="content"><line-chart/></div>
-      </el-card>
+      <div class="content"><line-chart /></div>
+    </el-card>
   </div>
 </template>
 
@@ -33,44 +31,43 @@ import lineChart from "../../components/charts/lineChart.vue";
 import funnelChart from "../../components/charts/funnelChart.vue";
 import pineChart from "../../components/charts/pineChart.vue";
 
-export default({
-  components: { MapContainer,lineChart,funnelChart,pineChart ,heatMap},
-});
+export default {
+  components: { MapContainer, lineChart, funnelChart, pineChart, heatMap },
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .parent {
-  margin-top:10px;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(7, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
-  margin-left:30px;
+  margin-left: 30px;
   margin-right: 30px;
 }
-.title{
+.title {
   margin-top: 10px;
   text-align: center;
-  font-family: 'hgw';
+  font-family: "hgw";
   font-size: 20px;
 }
-.content{
-  display:flex;
+.content {
+  display: flex;
   align-items: center;
 }
 .div1 {
   grid-area: 1 / 1 / 5 / 4;
   height: 600px;
   width: 700px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   border-radius: 20px;
-
 }
 ::v-deep .el-card__body {
-        padding: 0;
-        }
+  padding: 0;
+}
 .div2 {
   grid-area: 1 / 4 / 3 / 7;
   height: 300px;

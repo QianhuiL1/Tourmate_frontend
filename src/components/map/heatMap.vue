@@ -2,20 +2,19 @@
   <div>
     <div id="container"></div>
     <div class="input-card" style="width: auto">
-      <div class="input-item">
+      <!-- <div class="input-item">
         <button class="btn" @click="heatmap.show()">显示热力图</button>
       </div>
       <div class="input-item">
         <button class="btn" @click="heatmap.hide()">关闭热力图</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-// https://a.amap.com/jsapi_demos/static/resource/heatmapData.js
 import AMapLoader from "@amap/amap-jsapi-loader";
-import {myData} from "./heatmapData.js";
+import { myData } from "./heatmapData.js";
 
 export default {
   mounted() {
@@ -28,7 +27,7 @@ export default {
     return {
       map: null,
       heatmap: null,
-      heatmapData:myData()
+      heatmapData: myData(),
     };
   },
   methods: {
@@ -58,15 +57,13 @@ export default {
             var heatmap = new AMap.HeatMap(map, {
               radius: 25, //给定半径
               opacity: [0, 0.8],
-              /*,
-            gradient:{
-                0.5: 'blue',
-                0.65: 'rgb(117,211,248)',
-                0.7: 'rgb(0, 255, 0)',
-                0.9: '#ffea00',
-                1.0: 'red'
-            }
-             */
+              gradient: {
+                0.5: "blue",
+                0.65: "rgb(117,211,248)",
+                0.7: "rgb(0, 255, 0)",
+                0.9: "#ffea00",
+                1.0: "red",
+              },
             });
             __this.heatmap = heatmap;
             __this.initHeat();
@@ -77,35 +74,10 @@ export default {
         });
     },
     initHeat() {
-      //设置数据集：该数据为北京部分“公园”数据
-    //   var heatmapData = [
-    //     {
-    //       lng: 116.191031,
-    //       lat: 39.988585,
-    //       count: 10,
-    //     },
-    //     {
-    //       lng: 116.389275,
-    //       lat: 39.925818,
-    //       count: 11,
-    //     },
-    //     {
-    //       lng: 116.287444,
-    //       lat: 39.810742,
-    //       count: 12,
-    //     },
-    //     {
-    //       lng: 116.481707,
-    //       lat: 39.940089,
-    //       count: 13,
-    //     },
-    //   ];
-    console.log('1',this.heatmapData)
       this.heatmap.setDataSet({
         data: this.heatmapData,
         max: 100,
       });
-      console.log('2',this.heatmap.getDataSet());
     },
     //判断浏览区是否支持canvas
     isSupportCanvas() {

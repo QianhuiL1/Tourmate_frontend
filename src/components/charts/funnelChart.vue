@@ -1,5 +1,5 @@
 <template>
-  <div id="rank" class="main"></div>
+  <div class="father"><div id="rank" class="main"></div></div>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
           formatter: "{b} : {c}%",
         },
         grid:{
-            x:25,
+            x:10,
             y:45,
             x2:5,
             y2:20,
@@ -60,8 +60,8 @@ export default {
               },
             },
             data: [
-              { value: 25776, name: "上海海昌海洋公园" },
-              { value: 13257, name: "峨眉山" },
+              { value: 25776, name: "峨眉山" },
+              { value: 13257, name: "上海海昌海洋公园" },
               { value: 11682, name: "自贡·中华彩灯大世界" },
               { value: 11333, name: "南山文化旅游区" },
               { value: 10337, name: "上海迪士尼乐园" },
@@ -99,8 +99,8 @@ export default {
               },
             },
             data: [
-              { value: 25776, name: "上海海昌海洋公园" },
-              { value: 13257, name: "峨眉山" },
+              { value: 25776, name: "峨眉山" },
+              { value: 13257, name: "上海海昌海洋公园" },
               { value: 11682, name: "自贡·中华彩灯大世界" },
               { value: 11333, name: "南山文化旅游区" },
               { value: 10337, name: "上海迪士尼乐园" },
@@ -116,9 +116,13 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+.father{
+  height: 300px;
+  width: 500px;
+}
 .main {
   height: 300px;
-  width: 400px;
+  width: 100%;
   margin: 0px;
 }
 </style>
