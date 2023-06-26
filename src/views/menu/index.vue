@@ -19,7 +19,7 @@
                   />
               </template>
             </div>
-            <div class="select2">
+            <!-- <div class="select2">
               <template>
                 <div class="smallTitle"><h3>模式</h3></div>
                 <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" style="margin-right:10px">全选</el-checkbox>
@@ -27,7 +27,7 @@
                   <el-checkbox v-for="model in models" :label="model" :key="model">{{ model }}</el-checkbox>
                 </el-checkbox-group>
               </template>
-            </div>
+            </div> -->
             <div class="select3">
               <template>
                 <div class="smallTitle"><h3>类型</h3></div>
@@ -159,6 +159,9 @@
         
       </el-card>
     </div>
+    <div v-show='showTopIcon' class="toTopItem" @click="toTop">
+      <img src='../../assets/icons/toTop_before.png' alt="" class="toTopIcon"/>
+    </div>
   </div>
 </template>
 
@@ -176,6 +179,7 @@ export default {
   },
   data() {
     return {
+      showTopIcon: false,
       fixed: false,
       showMore: false,
       modelList:[],
@@ -222,6 +226,7 @@ export default {
   },
   mounted(){
     window.addEventListener('scroll',this.fixedCard);
+    window.addEventListener('scroll', this.showToTop, true)
   },
   methods: {
     fixedCard(){
@@ -229,6 +234,20 @@ export default {
       document.documentElement.scrollTop ||
       document.body.scrollTop
       scrollTop >= 90 ? (this.fixed = true) : (this.fixed = false)
+    },
+    showToTop(){
+      console.log('距离',document.documentElement.scrollTop)
+      if(document.documentElement.scrollTop !==0){
+        this.showTopIcon = true;
+      }else{
+        this.showTopIcon = false;
+      }
+    },
+    toTop(){
+      window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+      })
     },
     divideItems(){
       // 获取搜索结果
@@ -493,6 +512,24 @@ export default {
       }
     }
   }
+}
+.toTopItem{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  height: 60px;
+  width: 60px;
+  :hover {
+        cursor: pointer; //鼠标变手
+  }
+  
+  .toTopIcon{
+    height: 100%;
+    width: 100%;
+  }
+}
+.toTopItem:hover .toTopIcon{
+  content: url(../../assets/icons/toTop_after.png)
 }
 </style>
 
