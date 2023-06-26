@@ -61,19 +61,6 @@ export const constantRoutes = [
     component: () => import('@/views/error/401'),
     hidden: true
   },
-  // {
-  //   path: '',
-  //   component: Layout,
-  //   redirect: 'index',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/menu/index'),
-  //       name: 'Index',
-  //       meta: { title: '首页', icon: 'dashboard', affix: true }
-  //     }
-  //   ]
-  // },
   {
     path: '',
     component: Layout,
@@ -137,7 +124,8 @@ export const constantRoutes = [
         name: 'scenery',
         meta: { title: '景点一览', icon: 'dashboard', affix: true }
       }
-    ]
+    ],
+    hidden: true
   },
   {
     path: '/user',

@@ -1,11 +1,32 @@
 @font-face{
-  font-family: 'lca';
-  src: url('./LCALLIG.TTF')
+  font-family: 'arl';
+  src: url('./ARLRDBD.TTF')
+}
+@font-face{
+  font-family: 'brld';
+  src: url('./BRLNSB.TTF')
+}
+@font-face{
+  font-family: 'brln';
+  src: url('./BRLNSDB.TTF')
+}
+@font-face{
+  font-family: 'brlr';
+  src: url('./BRLNSR.TTF')
+}
+@font-face{
+  font-family: 'fzy';
+  src: url('./FZYTK.TTF')
+}
+@font-face{
+  font-family: 'hgh';
+  src: url('./HGHB_CNKI.TTF')
 }
 @font-face{
   font-family: 'hgx';
   src: url('./HGXC_CNKI.TTF')
 }
+/* 华光中雅 */
 @font-face{
   font-family: 'hgz';
   src: url('./HGZYT_CNKI.TTF')

@@ -19,7 +19,7 @@
                   />
               </template>
             </div>
-            <div class="select2">
+            <!-- <div class="select2">
               <template>
                 <div class="smallTitle"><h3>模式</h3></div>
                 <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" style="margin-right:10px">全选</el-checkbox>
@@ -27,7 +27,7 @@
                   <el-checkbox v-for="model in models" :label="model" :key="model">{{ model }}</el-checkbox>
                 </el-checkbox-group>
               </template>
-            </div>
+            </div> -->
             <div class="select3">
               <template>
                 <div class="smallTitle"><h3>类型</h3></div>
@@ -46,60 +46,69 @@
       </div>
       <div class="middle">
         <div class="rowInMiddle">
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[0]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[0] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[1]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[1] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[2]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[2] }}</h4>
-            </div>
-          </el-card>
+          <template v-for='(item,index) in initItems'>
+            <el-card class="sceneCard" :key='index' v-if="index%3===0" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===1" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===2" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+          </template>
         </div>
-        <div class="rowInMiddle">
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[3]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[3] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[4]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[4] }}</h4>
-            </div>
-          </el-card>
-          <el-card class="sceneCard">
-            <div class="sceneImg">
-              <img :src="sceneList[5]" alt="" class="fullImg">
-            </div>
-            <div class="sceneTitle">
-              <h4>{{ sceneName[5] }}</h4>
-            </div>
-          </el-card>
+        <el-button type="text" v-if="!showMore" class="more" @click="getMore">更多</el-button>
+        <div v-infinite-scroll="load" class="rowInMiddle" v-show="showMore">
+          <template v-for='(item,index) in dividedItems'>
+            <el-card class="sceneCard" :key='index' v-if="index%3===0" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===1" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+            <el-card class="sceneCard" :key='index' v-if="index%3===2" element-loading-text="拼命加载中">
+              <div class="sceneImg" @click="toInfo(item)">
+                <img :src="item.img" alt="" class="fullImg">
+              </div>
+              <div class="sceneTitle">
+                <el-button type="text" @click="toInfo(item)">{{ item.name }}</el-button>
+              </div>
+            </el-card>
+          </template>
         </div>
-        <div class="more"><el-link type="primary" href="https://www.ctrip.com/" target="_blank">更多</el-link></div>
+        <!-- 下拉加载时的loading动画 -->
+        <div v-if="loading" style="margin-top:10px" class="loading">
+          <span></span>
+        </div>
+        <div v-if="noMore" style="margin: 10 auto; text-align:center; font-size:18px;font-weight: 550; color:#000000">-----------我是有底线的------------</div>
       </div>
-      <div class="below">
+      <div class="below" v-show="!showMore">
         <div class="hotTitle">
           <h1>当季热推</h1>
         </div>
@@ -148,21 +157,31 @@
     <div :class="fixed == true ? 'fixedRight' : 'right'">
       <el-card class="rightCard">
         
-
       </el-card>
+    </div>
+    <div v-show='showTopIcon' class="toTopItem" @click="toTop">
+      <img src='../../assets/icons/toTop_before.png' alt="" class="toTopIcon"/>
     </div>
   </div>
 </template>
 
 <script>
 import { regionData} from 'element-china-area-data'
+import { vInfiniteScroll } from 'element-ui'
+import {mapGetters, mapState,mapMutations} from 'vuex';
+import store from '@/store'
 const modelOptions = ["一日游","跟团游","自由行","主题游","游学"]
 const typeOptions = ["现代风情","历史风情","博物馆","动物园","游乐中心","历史伟人","休闲公园","植物园","国内名校","购物中心","电影剧院","红色文化","体育中心","宗教圣地","美食天地"]
 export default {
   name: "Menu",
+  directives:{
+    "infinite-scroll": vInfiniteScroll,
+  },
   data() {
     return {
+      showTopIcon: false,
       fixed: false,
+      showMore: false,
       modelList:[],
       checkAll: false,
       models: modelOptions,
@@ -175,16 +194,14 @@ export default {
       options: regionData,
       // 存放用户选择后省市区的信息
       selectedOptions: [],
-      sceneList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
-      'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'
-  ],
-      sceneName:['景点名','景点名','景点名','景点名','景点名','景点名'],
+      searchItems:[], // 搜索出的所有数据
+      initItems: [], // 展示出的部分数据
+      dividedItems: [], // 渲染数据数组
+      loading: false, // 加载动画
+      pages: 10, // 数据总页数
+      pageIndex: 1 ,// 分页查询参数
       hotList:['https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0','https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0'],
-      hotName:['热推名','热推名']
+      hotName:['热推名','热推名'],
     };
   },
   watch: {
@@ -196,10 +213,20 @@ export default {
     }
   },
   created() {
-    
+    this.divideItems();
+  },
+  computed:{
+    noMore(){
+      // 页数大于总页数停止加载
+      return this.pageIndex >= this.pages;
+    },
+    disabled(){
+      return this.loading || this.noMore;
+    }
   },
   mounted(){
-    window.addEventListener('scroll',this.fixedCard)
+    window.addEventListener('scroll',this.fixedCard);
+    window.addEventListener('scroll', this.showToTop, true)
   },
   methods: {
     fixedCard(){
@@ -208,8 +235,63 @@ export default {
       document.body.scrollTop
       scrollTop >= 90 ? (this.fixed = true) : (this.fixed = false)
     },
+    showToTop(){
+      console.log('距离',document.documentElement.scrollTop)
+      if(document.documentElement.scrollTop !==0){
+        this.showTopIcon = true;
+      }else{
+        this.showTopIcon = false;
+      }
+    },
+    toTop(){
+      window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+      })
+    },
+    divideItems(){
+      // 获取搜索结果
+      // 将前六项取出放入sceneList
+      // 剩余加入dividedItems
+       this.initItems=[
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点2'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点3'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点4'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点5'},
+       {img: 'https://ts1.cn.mm.bing.net/th/id/R-C.bd53096921883dc16d2d43ae9b13beb2?rik=hAVg5u2Bswf%2f6w&riu=http%3a%2f%2fdimg03.c-ctrip.com%2fimages%2ffd%2ftg%2fg1%2fM04%2fCB%2f99%2fCghzflWw7F2ATxCcABtxFWU_LNw686.jpg&ehk=O0khPGFITeE3EYpaMmGp%2fmoqaxywztOVmBqbiH6PV7c%3d&risl=&pid=ImgRaw&r=0',
+       name:'景点6'},
+       ]
+       this.dividedItems = this.initItems
+    }, 
+    getMore(){
+      this.showMore = true;
+    },
+    // 下拉加载事件
+    load(){
+      // 划到底部时进行加载
+      this.loading = true;
+      setTimeout(() => {
+        let param = {
+          pageIndex:this.pageIndex+1,   //分页参数
+          pageSize:6, //每页查询的条数
+        }
+        // 请求获取数据
+      }, 1500);
+    },
+    // 跳转到详情页
+    toInfo(item){
+      console.log(item)
+      this.$store.commit('setBasicInfo',item)
+      this.$router.push({path:"/scenery",query:{param: item.name}})
+    },
     handleQuery(){
-
+      // 给pages总页数赋值
     },
     handleCheckAllChange(val) {
         this.modelList = val ? modelOptions : [];
@@ -340,18 +422,20 @@ export default {
   margin-top: 20px;
   margin-right: 640px;
   .rowInMiddle{
-    margin-top:15px;
+    // margin-top:15px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .sceneCard{
     //background-color: blue;
+    margin-top: 10px;
     ::v-deep .el-card__body {
     padding: 0;
     }
     height: 200px;
-    width: 220px;
+    width: 213px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -361,14 +445,20 @@ export default {
       border-radius: 10px;
       // display: table-cell;
       // text-align: center;
+      :hover {
+        cursor: pointer; //鼠标变手
+        }
       .fullImg{
+        
         width: 100%;
         height: 100%;
       }
     }
     .sceneTitle{
       text-align:center;
-      margin-top: -15px;
+      :hover{
+        color: blue
+      }
     }
     }
     .more{
@@ -380,7 +470,7 @@ export default {
   display:flex;
   flex-direction: column;
   margin-left: 30px;
-  margin-right: 660px;
+  margin-right: 640px;
   .hotTitle{
     font-family: 'hgz';
     font-size: 20px;
@@ -422,6 +512,24 @@ export default {
       }
     }
   }
+}
+.toTopItem{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  height: 60px;
+  width: 60px;
+  :hover {
+        cursor: pointer; //鼠标变手
+  }
+  
+  .toTopIcon{
+    height: 100%;
+    width: 100%;
+  }
+}
+.toTopItem:hover .toTopIcon{
+  content: url(../../assets/icons/toTop_after.png)
 }
 </style>
 
