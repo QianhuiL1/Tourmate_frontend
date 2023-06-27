@@ -3,7 +3,21 @@
     <el-card class="topCard">
       <div class="titleblock">
         <div class="title">景点</div>
-        <div class="score">4.6 （评分）</div>
+        <div class="score">
+          <span class="star-value">
+            {{ starValue }}
+          </span>
+          <div
+            v-for="index in 5"
+            :key="index"
+            class="iconfont icon-star star-item star-placeholder"
+          >
+            <div
+              class="iconfont icon-star star-item star-active"
+              :style="{ width: getWidth(index)}"
+            ></div>
+          </div>        
+        </div>
         <div class="position"><img src='../../assets/icons/position.png' alt="" style="width:24px;height:24px;margin-right: 20px"/>位置</div>
       </div>
       <div class="imgblock">
@@ -75,12 +89,19 @@
 </template>
 
 <script>
+import "../../assets/styles/icon-star.css"
+
 export default{
   name:'Scenery',
   data(){
     return{
       showTopIcon: false,
-      activeName: 'second'
+      activeName: 'second',
+      maxValue: {
+        type: Number,
+        default: 5,
+      },
+      starValue: 4.6,
     }
   },
   mounted() {
@@ -88,6 +109,9 @@ export default{
   },
   created(){
     this.initData();
+  },
+  computed:{
+    
   },
   methods:{
     showToTop(){
@@ -107,8 +131,18 @@ export default{
           behavior: 'smooth'
       })
     },
+    getWidth(index) {
+      const gap = this.starValue - index + 1;
+      if (gap >= 1) {
+        return "100%";
+      } else if (gap <= 0) {
+        return 0;
+      } else {
+        return gap * 100 + "%";
+      }
+    },
     handleClick(tab,event){
-
+ 
     }
   }
 
@@ -132,6 +166,10 @@ export default{
     flex-direction: row;
     justify-content: space-between;
   }
+}
+.star-value{
+  font-size: 30px;
+  margin-right: 10px;
 }
 .titleblock{
     margin-left: 20px;
@@ -216,9 +254,9 @@ export default{
   border-radius: 30px;
 }
 .content{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .toTopItem{
   position: fixed;
@@ -226,6 +264,7 @@ export default{
   right: 30px;
   height: 60px;
   width: 60px;
+  z-index: 999;
   :hover {
         cursor: pointer; //鼠标变手
   }
