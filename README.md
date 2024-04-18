@@ -1,4 +1,4 @@
-# Tourmate Travel Data Service System
+# Tourmate —— Data-Driven Tourism Service System
 
 ## Introduction
 Tourmate is a comprehensive travel service platform powered by big data analytics to enhance travel experience. The system integrates sophisticated features for tourist attraction recommendations, personalized travel planning, and community interaction, all facilitated by an advanced microservice architecture.
@@ -13,7 +13,7 @@ Tourmate is a comprehensive travel service platform powered by big data analytic
 - **Attraction Search:** Users can search for attractions using keywords or filters.
 - **Hotspot Recommendations:** Automatically curated seasonal popular attractions with details like reviews, images, and nearby dining options.
 
-### Big Data Dashboard
+### Data Dashboard
 - **Heatmaps:** Visual representation of popular tourist regions.
 - **Top Attractions:** Rankings based on visitor data.
 - **Keyword Clouds:** Displays current popular search terms.
@@ -54,12 +54,35 @@ Tourmate is a comprehensive travel service platform powered by big data analytic
 - **Recommendation System:** Utilizes a neural network model for personalized attraction recommendations.
 - **Travel Planning Algorithm:** Uses ant colony optimization for efficient route planning.
 
+## Page Layout Diagram
+
+<table>
+    <tr>
+        <td><img src="img/图片1.png"/></td>
+        <td><img src="img/图片2.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="img/图片3.png"/></td>
+        <td><img src="img/图片4.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="img/图片5.png"/></td>
+        <td><img src="img/图片6.png"/></td>
+    </tr>
+	<tr>
+        <td><img src="img/图片7.png"/></td>
+        <td><img src="img/图片8.png"/></td>
+    </tr>	 
+    <tr>
+        <td><img src="img/图片9.png"/></td>
+        <td><img src="img/图片10.png"/></td>
+    </tr>	
+</table>
+
 ## Getting Started
 
 ### Prerequisites
-- Java 8+
 - Node.js 10+
-- MySQL 5.7+
 
 ### Installation
 ```bash
